@@ -5,32 +5,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import datetime as dt
 import streamlit as st
-
+from data_cleaning import data
 
 # Set the page background color to white
 
-
-
-data = pd.read_csv('Student Mental health.csv')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 sns.set_style(style='darkgrid')
-#data cleaning
-
-#change objet type to datatime
-data['Timestamp'] = pd.to_datetime(data['Timestamp'])
-data['month'] = data['Timestamp'].dt.month_name()
-data['day'] = data['Timestamp'].dt.day_name()
-data['year'] = data['Timestamp'].dt.year
-data['hour'] = data['Timestamp'].dt.hour
-
-#change null values of Age
-data['Age'].fillna(data['Age'].median(), inplace = True)
-data['Age'] = data['Age'].astype(int)
-
 st.title('Student Mental Health Exploratory Data Analysis')
 
-#data visualization
 
+#data visualization
 
 #normalize the years distribution
 data['Year'] = data['Your current year of Study'].str.extract(r'(\d+)').astype(int)
@@ -122,4 +106,5 @@ if show_depression:
 if show_panic:
     st.write("In this graphic we can see panic students tendecies")
     pap()
+
 

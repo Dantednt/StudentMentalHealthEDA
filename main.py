@@ -31,6 +31,14 @@ st.title('Student Mental Health Exploratory Data Analysis')
 
 #data visualization
 
+
+#normalize the years distribution
+data['Year'] = data['Your current year of Study'].str.extract(r'(\d+)').astype(int)
+year_counts = data.groupby('Year').size()
+
+
+
+#anxiety group
 def ap():
     #gender distribution
     gender_freq = data['Choose your gender'].value_counts()
@@ -46,11 +54,47 @@ def ap():
 
     return(st.pyplot())
 
+#depression groups
+def dp():
+    #depression group
+    Depression_group = data.groupby(['Year', 'Choose your gender', 'Do you have Depression?']).size().reset_index(name='counter')
 
-# Define una variable de estado para controlar la visibilidad del dataframe
+    #Female depresion
+    g_female = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='Blues', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Female'"))
+    g_female.set_axis_labels()
+    g_female.set_titles("Female")
+    st.pyplot()
+
+    #Male depression
+    g_male = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='rocket', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male'"))
+    g_male.set_axis_labels()
+    g_male.set_titles("Male")
+    st.pyplot()
+
+#panic attack groups
+def pap():
+    #Panic attack group
+    panic_group = data.groupby(['Year', 'Choose your gender', 'Do you have Panic attack?']).size().reset_index(name='counter')
+
+    #Female Panic
+    p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette='Blues', kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
+    p_female.set_axis_labels()
+    p_female.set_titles("Female")
+    st.pyplot()
+
+    #Male panic
+    p_male = sns.catplot(x='Year', y='counter', hue= 'Do you have Panic attack?', palette = 'rocket', kind = 'bar', row = 'Choose your gender', data= panic_group.query("`Choose your gender` == 'Male'"))
+    p_male.set_axis_labels()
+    p_male.set_titles("Male")
+    st.pyplot()
+
+
 show_dataframe = st.sidebar.checkbox("show dataset📜")
 show_genders = st.sidebar.checkbox("Show gender distribution")
-show_depression = st.sidebar.checkbox("Show student depression information")
+show_anxiety = st.sidebar.checkbox("Show student anxiety information")
+show_depression = st.sidebar.checkbox('Show student depression information')
+show_panic = st.sidebar.checkbox('Show student panic attack information')
+
 # Si el usuario selecciona la casilla de ver el dataframe, muestra el dataframe
 if show_dataframe:
     st.write("Link of the oficial dataset: https://www.kaggle.com/datasets/shariful07/student-mental-health")
@@ -66,43 +110,16 @@ if show_genders:
     st.pyplot() # show grafic on the streamlit screen
 
 
-if show_depression:
+if show_anxiety:
     st.write("In this graphic we can see anxiety tendencies about the students")
     ap()
     
 
+if show_depression:
+    st.write("In this graphic we can see depressed students tendecies")
+    dp()
 
-#normalize the years distribution
-data['Year'] = data['Your current year of Study'].str.extract(r'(\d+)').astype(int)
-year_counts = data.groupby('Year').size()
-
-#depression group
-Depression_group = data.groupby(['Year', 'Choose your gender', 'Do you have Depression?']).size().reset_index(name='counter')
-
-#Female depresion
-g_female = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='Blues', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Female'"))
-g_female.set_axis_labels()
-g_female.set_titles("Female")
-st.pyplot()
-
-#Male depression
-g_male = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='rocket', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male'"))
-g_male.set_axis_labels()
-g_male.set_titles("Male")
-st.pyplot()
-
-#Panic attack group
-panic_group = data.groupby(['Year', 'Choose your gender', 'Do you have Panic attack?']).size().reset_index(name='counter')
-
-#Female Panic
-p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette='Blues', kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
-p_female.set_axis_labels()
-p_female.set_titles("Female")
-st.pyplot()
-
-#Male panic
-p_male = sns.catplot(x='Year', y='counter', hue= 'Do you have Panic attack?', palette = 'rocket', kind = 'bar', row = 'Choose your gender', data= panic_group.query("`Choose your gender` == 'Male'"))
-p_male.set_axis_labels()
-p_male.set_titles("Male")
-st.pyplot()
+if show_panic:
+    st.write("In this graphic we can see panic students tendecies")
+    pap()
 

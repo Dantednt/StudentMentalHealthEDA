@@ -5,13 +5,23 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import datetime as dt
 import streamlit as st
-from data_cleaning import data
+from ml.data_cleaning import data
+from PIL import Image
 
 # Set the page background color to white
+sns.set_style(style='darkgrid')
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-sns.set_style(style='darkgrid')
 st.title('Student Mental Health Exploratory Data Analysis')
+st.subheader('What is the point of this project?')
+st.write('Mental health among university students is a critical issue that can impact their ability to succeed academically and personally. In this project, an exploratory data analysis (EDA) was conducted to better understand the prevalence of three of the most common mental health disorders among university students: depression, anxiety, and panic attacks. Through a variety of data visualization techniques, the relationship between these disorders and factors such as gender, age, and academic level were explored. The goal of this project is to provide valuable insights into the patterns and trends in mental health among university students, in order to improve understanding and attention to these critical health challenges')
+github_url = "https://github.com/Dantednt"
+github_image_url = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+
+html_code = f"<a href='{github_url}' target='_blank'><img src='{github_image_url}' height='40'></a>"
+
+st.sidebar.write(html_code, unsafe_allow_html=True)
+
 
 
 #data visualization
@@ -72,7 +82,7 @@ def pap():
     p_male.set_titles("Male")
     st.pyplot()
 
-
+st.sidebar.title("data visualization")
 show_dataframe = st.sidebar.checkbox("show dataset📜")
 show_genders = st.sidebar.checkbox("Show gender distribution")
 show_anxiety = st.sidebar.checkbox("Show student anxiety information")

@@ -71,16 +71,19 @@ def pap():
     panic_group = data.groupby(['Year', 'Choose your gender', 'Do you have Panic attack?']).size().reset_index(name='counter')
 
     #Female Panic
-    p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette='Blues', kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
+    p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette=([(1.0, 0.4, 0.4), (0.8, 0.2, 0.2)]), kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
     p_female.set_axis_labels()
     p_female.set_titles("Female")
     st.pyplot()
 
     #Male panic
-    p_male = sns.catplot(x='Year', y='counter', hue= 'Do you have Panic attack?', palette = 'rocket', kind = 'bar', row = 'Choose your gender', data= panic_group.query("`Choose your gender` == 'Male'"))
-    p_male.set_axis_labels()
-    p_male.set_titles("Male")
+    sns.displot(data=panic_group.query("`Choose your gender` == 'Male'"), x="Year", hue="Do you have Panic attack?", multiple="stack", palette = sns.color_palette([(1.0, 0.4, 0.4), (0.8, 0.2, 0.2)]),kind="kde")
+    plt.xlabel('Year')
+    plt.ylabel('Density')
+    plt.title('Panic Attack by Year (Male)')
+
     st.pyplot()
+
 
 st.sidebar.title("data visualization")
 show_dataframe = st.sidebar.checkbox("show dataset📜")

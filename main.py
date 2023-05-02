@@ -117,7 +117,10 @@ if show_depression:
     dp()
 
 if show_panic:
-    st.write("In this graphic we can see panic students tendecies")
+    st.write("""It is common for students' mental health to be affected by the stress and pressure associated with their academic and personal responsibilities. In general, it has been observed that women experience higher rates of anxiety disorders, such as panic attacks, compared to men. This may be due to a combination of biological, psychological and social factors.
+                As for the difference between freshmen and seniors in terms of panic attacks, it could be the result of several factors. It is possible that freshmen are experiencing a higher level of stress due to the transition to college life, while seniors may have developed better stress and anxiety management skills over time.
+                It is also possible that fourth-year students have learned to avoid situations that trigger their panic attacks or have sought treatment for their anxiety, which may explain why they have a lower incidence of panic attacks compared to first-year students.
+                """)
     pap()
 
 

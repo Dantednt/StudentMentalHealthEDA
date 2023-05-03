@@ -7,6 +7,8 @@ import datetime as dt
 import streamlit as st
 from ml.data_cleaning import data
 from PIL import Image
+from palettes.palettes import c1, c2
+
 
 # Set the page background color to white
 sns.set_style(style='darkgrid')
@@ -54,15 +56,15 @@ def dp():
     Depression_group = data.groupby(['Year', 'Choose your gender', 'Do you have Depression?']).size().reset_index(name='counter')
 
     #Female depresion
-    g_female = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='Blues', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Female'"))
+    g_female = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette=c2, kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Female'"))
     g_female.set_axis_labels()
-    g_female.set_titles("Female")
     st.pyplot()
+
 
     #Male depression
     g_male = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='rocket', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male'"))
     g_male.set_axis_labels()
-    g_male.set_titles("Male")
+    g_male.set_titles("Male Depression Tendecies")
     st.pyplot()
 
 #panic attack groups
@@ -71,16 +73,17 @@ def pap():
     panic_group = data.groupby(['Year', 'Choose your gender', 'Do you have Panic attack?']).size().reset_index(name='counter')
 
     #Female Panic
-    p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette=([(1.0, 0.4, 0.4), (0.8, 0.2, 0.2)]), kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
+    p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette=c1, kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
     p_female.set_axis_labels()
     p_female.set_titles("Female")
     st.pyplot()
 
     #Male panic
-    sns.displot(data=panic_group.query("`Choose your gender` == 'Male'"), x="Year", hue="Do you have Panic attack?", multiple="stack", palette = sns.color_palette([(1.0, 0.4, 0.4), (0.8, 0.2, 0.2)]),kind="kde")
+    sns.displot(data=panic_group.query("`Choose your gender` == 'Male'"), x="Year", hue="Do you have Panic attack?", multiple="stack", palette = sns.color_palette([(255/255, 87/255, 51/255), (199/255, 0, 57/255)]),kind="kde")
     plt.xlabel('Year')
     plt.ylabel('Density')
     plt.title('Panic Attack by Year (Male)')
+
 
     st.pyplot()
 

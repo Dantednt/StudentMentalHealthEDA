@@ -7,7 +7,7 @@ import datetime as dt
 import streamlit as st
 from ml.data_cleaning import data
 from PIL import Image
-from palettes.palettes import c1, c2
+from palettes.palettes import c1, c2, c3
 
 
 # Set the page background color to white
@@ -79,7 +79,7 @@ def pap():
     st.pyplot()
 
     #Male panic
-    sns.displot(data=panic_group.query("`Choose your gender` == 'Male'"), x="Year", hue="Do you have Panic attack?", multiple="stack", palette = sns.color_palette([(255/255, 87/255, 51/255), (199/255, 0, 57/255)]),kind="kde")
+    sns.displot(data=panic_group.query("`Choose your gender` == 'Male'"), x="Year", hue="Do you have Panic attack?", multiple="stack", palette = c3,kind="kde")
     plt.xlabel('Year')
     plt.ylabel('Density')
     plt.title('Panic Attack by Year (Male)')

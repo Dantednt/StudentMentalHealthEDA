@@ -16,4 +16,3 @@ data['hour'] = data['Timestamp'].dt.hour
 data['Age'].fillna(data['Age'].median(), inplace = True)
 data['Age'] = data['Age'].astype(int)
 
-print(data.columns)

@@ -7,7 +7,7 @@ import datetime as dt
 import streamlit as st
 from ml.data_cleaning import data
 from PIL import Image
-from palettes.palettes import c1, c2, c3
+from palettes.palettes import c1, c2, c3, c4
 
 
 # Set the page background color to white
@@ -102,7 +102,7 @@ if show_dataframe:
 
 if show_genders:
     st.write("This is the student gender distribution by gender and age")
-    sns.displot(data, x="Age", hue="Choose your gender", multiple="stack", palette="rocket", kind="kde")
+    sns.displot(data, x="Age", hue="Choose your gender", multiple="stack", palette=c4, kind="kde")
     plt.xlabel('Age')
     plt.ylabel('Frequency')
     plt.title('Age distribution')

@@ -40,15 +40,20 @@ def ap():
     gender_freq = data['Choose your gender'].value_counts()
 
     #anxiety distribution and frequency
-    anxiety_group = data.groupby(['Choose your gender', 'Do you have Anxiety?']).size().reset_index(name='counter')
-    sns.barplot(x="Choose your gender", y="counter", hue="Do you have Anxiety?", data=anxiety_group, palette="Greens")
+    anxiety_group = data.groupby(['Choose your gender', 'Do you have Anxiety?','Year']).size().reset_index(name='counter')
+    sns.barplot(x="Year", y="counter", hue="Do you have Anxiety?", data=anxiety_group.query("`Choose your gender` == 'Female'"), palette=c1)
 
     # Config grafic
-    plt.title("Anxiety Counter")
-    plt.xlabel("Gender")
+    plt.title("Anxiety in females students", fontsize = 13)
+    plt.xlabel("Year")
     plt.ylabel("Person number")
+    st.pyplot()
 
-    return(st.pyplot())
+    sns.barplot(x="Year", y="counter", hue="Do you have Anxiety?", data=anxiety_group.query("`Choose your gender` == 'Male'"), palette=c2)
+    plt.title("Anxiety in male students", fontsize = 13)
+    plt.xlabel("Year")
+    plt.ylabel("Person number")
+    st.pyplot()
 
 #depression groups
 def dp():
@@ -62,7 +67,7 @@ def dp():
 
 
     #Male depression
-    g_male = sns.catplot(x='Year', y = 'counter', hue = 'Do you have Depression?', palette = c4, kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male;") )
+    g_male = sns.catplot(x='Year', y = 'counter', hue = 'Do you have Depression?', palette = c4, kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male'") )
     g_male.set_axis_labels()
     g_male.set_titles("Male Depression Tendecies")
     st.pyplot()

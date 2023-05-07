@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import datetime as dt
 import streamlit as st
-from ml.data_cleaning import data
+from data_cleaning import data
 from PIL import Image
-from palettes.palettes import c1, c2, c3, c4
+from palettes.palettes import *
 
 
 # Set the page background color to white
@@ -62,7 +62,7 @@ def dp():
 
 
     #Male depression
-    g_male = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette='rocket', kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male'"))
+    g_male = sns.catplot(x='Year', y = 'counter', hue = 'Do you have Depression?', palette = c4, kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male;") )
     g_male.set_axis_labels()
     g_male.set_titles("Male Depression Tendecies")
     st.pyplot()
@@ -101,13 +101,18 @@ if show_dataframe:
     st.dataframe(data)#age distribution and frequency 
 
 if show_genders:
-    st.write("This is the student gender distribution by gender and age")
+    st.title("Gender and Age")
+    st.write("""
+    As we can see in the following graph, the majority of students who responded to this small survey were mostly female, with a proportionally small amount of male students, we can also see the ages of these students.
+    """)
+            
     sns.displot(data, x="Age", hue="Choose your gender", multiple="stack", palette=c4, kind="kde")
     plt.xlabel('Age')
-    plt.ylabel('Frequency')
-    plt.title('Age distribution')
+    plt.title('Gender distribution')
 
     st.pyplot() # show grafic on the streamlit screen
+
+
 
 
 if show_anxiety:
@@ -120,10 +125,12 @@ if show_depression:
     dp()
 
 if show_panic:
+    st.title("Panic attacks in university students")
     st.write("""It is common for students' mental health to be affected by the stress and pressure associated with their academic and personal responsibilities. In general, it has been observed that women experience higher rates of anxiety disorders, such as panic attacks, compared to men. This may be due to a combination of biological, psychological and social factors.
                 As for the difference between freshmen and seniors in terms of panic attacks, it could be the result of several factors. It is possible that freshmen are experiencing a higher level of stress due to the transition to college life, while seniors may have developed better stress and anxiety management skills over time.
                 It is also possible that fourth-year students have learned to avoid situations that trigger their panic attacks or have sought treatment for their anxiety, which may explain why they have a lower incidence of panic attacks compared to first-year students.
                 """)
     pap()
+
 
 

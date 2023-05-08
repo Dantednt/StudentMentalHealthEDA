@@ -41,7 +41,7 @@ def ap():
 
     #anxiety distribution and frequency
     anxiety_group = data.groupby(['Choose your gender', 'Do you have Anxiety?','Year']).size().reset_index(name='counter')
-    sns.barplot(x="Year", y="counter", hue="Do you have Anxiety?", data=anxiety_group.query("`Choose your gender` == 'Female'"), palette=c1)
+    sns.barplot(x="Year", y="counter", hue="Do you have Anxiety?", data=anxiety_group.query("`Choose your gender` == 'Female'"), palette=sea, saturation=0.5)
 
     # Config grafic
     plt.title("Anxiety in females students", fontsize = 13)
@@ -49,7 +49,7 @@ def ap():
     plt.ylabel("Person number")
     st.pyplot()
 
-    sns.barplot(x="Year", y="counter", hue="Do you have Anxiety?", data=anxiety_group.query("`Choose your gender` == 'Male'"), palette=c2)
+    sns.barplot(x="Year", y="counter", hue="Do you have Anxiety?", data=anxiety_group.query("`Choose your gender` == 'Male'"), palette=summer, saturation=0.5)
     plt.title("Anxiety in male students", fontsize = 13)
     plt.xlabel("Year")
     plt.ylabel("Person number")
@@ -61,15 +61,18 @@ def dp():
     Depression_group = data.groupby(['Year', 'Choose your gender', 'Do you have Depression?']).size().reset_index(name='counter')
 
     #Female depresion
-    g_female = sns.catplot(x='Year', y='counter', hue='Do you have Depression?', palette=c2, kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Female'"))
-    g_female.set_axis_labels()
+    sns.barplot(x='Year', y='counter', hue='Do you have Depression?', palette=halloween, saturation=0.5, data=Depression_group.query("`Choose your gender` == 'Female'"))
+    plt.title("Depression tendecies in female students")
+    plt.xlabel("Year")
+    plt.ylabel("Person number")
     st.pyplot()
 
 
     #Male depression
-    g_male = sns.catplot(x='Year', y = 'counter', hue = 'Do you have Depression?', palette = c4, kind='bar', row='Choose your gender', data=Depression_group.query("`Choose your gender` == 'Male'") )
-    g_male.set_axis_labels()
-    g_male.set_titles("Male Depression Tendecies")
+    sns.barplot(x='Year', y = 'counter', hue = 'Do you have Depression?', palette = halloween2,saturation=0.5, data=Depression_group.query("`Choose your gender` == 'Male'") )
+    plt.title("Depression tendecies in male students")
+    plt.xlabel("Year")
+    plt.ylabel("Person number")
     st.pyplot()
 
 #panic attack groups
@@ -78,16 +81,17 @@ def pap():
     panic_group = data.groupby(['Year', 'Choose your gender', 'Do you have Panic attack?']).size().reset_index(name='counter')
 
     #Female Panic
-    p_female = sns.catplot(x='Year', y='counter', hue='Do you have Panic attack?', palette=c1, kind='bar', row='Choose your gender', data = panic_group.query("`Choose your gender` == 'Female'"))
-    p_female.set_axis_labels()
-    p_female.set_titles("Female")
+    sns.barplot(x='Year', y='counter', hue='Do you have Panic attack?', palette=cold, saturation=0.7, data = panic_group.query("`Choose your gender` == 'Female'"))
+    plt.title("Panic Attacks in females students")
+    plt.xlabel("Year")
+    plt.ylabel("Person number")
     st.pyplot()
 
     #Male panic
-    sns.displot(data=panic_group.query("`Choose your gender` == 'Male'"), x="Year", hue="Do you have Panic attack?", multiple="stack", palette = c3,kind="kde")
+    sns.barplot(x='Year', y='counter', hue='Do you have Panic attack?', palette=cold2, saturation=0.7, data=panic_group.query("`Choose your gender` == 'Male'"))
     plt.xlabel('Year')
-    plt.ylabel('Density')
-    plt.title('Panic Attack by Year (Male)')
+    plt.ylabel('Person number')
+    plt.title('Panic Attacks in male students')
 
 
     st.pyplot()
@@ -110,8 +114,8 @@ if show_genders:
     st.write("""
     As we can see in the following graph, the majority of students who responded to this small survey were mostly female, with a proportionally small amount of male students, we can also see the ages of these students.
     """)
-            
-    sns.displot(data, x="Age", hue="Choose your gender", multiple="stack", palette=c4, kind="kde")
+
+    sns.displot(data, x="Age", hue="Choose your gender", multiple="stack", palette=cold, kind="kde")
     plt.xlabel('Age')
     plt.title('Gender distribution')
 
@@ -121,7 +125,10 @@ if show_genders:
 
 
 if show_anxiety:
-    st.write("In this graphic we can see anxiety tendencies about the students")
+    st.title("Anxiety tendencies between university students")
+    st.write("""
+    Anxiety is one of the most serious yet common problems that we see when talking about mental health. Thanks to data visualization we can see the trends of anxiety among male and female students.
+    """)
     ap()
     
 

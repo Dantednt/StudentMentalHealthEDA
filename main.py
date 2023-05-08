@@ -129,11 +129,23 @@ if show_anxiety:
     st.write("""
     Anxiety is one of the most serious yet common problems that we see when talking about mental health. Thanks to data visualization we can see the trends of anxiety among male and female students.
     """)
+    st.write("""
+    As we can see in the following graph, although there are more female students, we can see that those who suffer from anxiety are less than half, with a significant decrease from year to year, until the last one where there is almost no anxiety.
+    """)
+    st.write("""
+    On the part of the male students, we can notice that there is a higher rate of anxiety, with the first and second year students suffering the most anxiety, although in the last years it suddenly decreases and ceases to exist.
+    """)
     ap()
     
 
 if show_depression:
-    st.write("In this graphic we can see depressed students tendecies")
+    st.title("Depression tendences in students")
+    st.write("""
+    When talking about mental illnesses, the most common without any doubt is depression, being sadly a mental illness which affects young adults a lot, reaching the point of threatening their own life and lowering their average.
+    """)
+    st.write("""
+    Thanks to the graph, we can notice that women have a higher rate of depression than men, with high peaks in the first and third year, but male students have very low rates, with the highest rate in the second year, and then disappear completely.
+    """)
     dp()
 
 if show_panic:
